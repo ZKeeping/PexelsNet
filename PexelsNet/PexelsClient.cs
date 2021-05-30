@@ -2,6 +2,7 @@ using System;
 using System.Net.Http;
 using Newtonsoft.Json;
 using System.Threading.Tasks;
+using System.Net;
 
 namespace PexelsNet
 {
@@ -13,6 +14,9 @@ namespace PexelsNet
 
         public PexelsClient(string apiKey)
         {
+            ServicePointManager.Expect100Continue = true;
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+
             _client.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", apiKey);
         }
 
